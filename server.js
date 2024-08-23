@@ -5,7 +5,7 @@ const app = express()
 import morgan from 'morgan'
 import { nanoid } from 'nanoid'
 
-const jobs = [
+let jobs = [
   {id: nanoid(), company: "IBM", position: "project manager"},
   {id: nanoid(), company: "Pepsi", position: "Cashier"}
 ]
@@ -67,6 +67,18 @@ app.post('/api/v1/jobs', (req, res) => {
   const job = {id, company, position}
   jobs.push(job)
   return res.status(201).json({ job })
+})
+
+// DELETE
+app.delete('/api/v1/jobs/:id', (req,res)=>{
+  const { id } = req.params
+  const job = jobs.find(job=>job.id === id)
+  if(!job){
+    return res.status(404).json({msg: `no job with id: ${id}`})
+  }
+  const newJobs = jobs.filter(job=>job.id !== id)
+  jobs = newJobs
+  res.status(200).json({msg: `job deleted with id: ${id}`})
 })
 
 const port = process.env.PORT || 5100
