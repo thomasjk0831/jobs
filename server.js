@@ -5,6 +5,7 @@ const app = express()
 import morgan from 'morgan'
 //routers
 import jobRouter from './routes/jobRouter.js'
+import mongoose from 'mongoose'
 
 //setup middleware to use logging about requests
 if(process.env.NODE.ENV === 'development')
@@ -36,7 +37,15 @@ app.use((err, req, res, next)=>{
 })
 
 const port = process.env.PORT || 5100
-app.listen(port, ()=>{
+
+try {
+  await mongoose.connect(process.env.MONGO_URL)
+  app.listen(port, ()=>{
     console.log("listening on 5100...")
 })
+} catch (error) {
+  console.log(error)
+  process.exit(1)
+}
+
 
