@@ -46,7 +46,7 @@ export const createJob = async (req, res) => {
     const id = nanoid(10)
     const job = {id, company, position}
     jobs.push(job)
-    return res.status(201).json({ job })
+    res.status(201).json({ job })
 }
 
 export const deleteJob = async (req,res)=> {
