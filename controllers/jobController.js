@@ -2,7 +2,8 @@ import { nanoid } from 'nanoid'
 
 let jobs = [
   {id: nanoid(), company: "IBM", position: "project manager"},
-  {id: nanoid(), company: "Pepsi", position: "Cashier"}
+  {id: nanoid(), company: "Pepsi", position: "Cashier"},
+  {id: nanoid(), company: "Coke", position: "teller"},
 ]
 
 export const getAllJobs = async (req, res)=>{
@@ -14,7 +15,6 @@ export const getSingleJob = async (req, res) => {
   const job = jobs.find(job=>job.id === id)
   if(!job){
     throw new Error()
-    return res.status(404).json({ msg: `no job with id ${id}`})
   }
   res.status(200).json({ job })
 }

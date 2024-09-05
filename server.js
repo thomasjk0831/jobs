@@ -44,7 +44,7 @@ try {
     console.log("listening on 5100...")
 })
 } catch (error) {
-  console.log(error)
+  console.log(`An error occured`, error)
   process.exit(1)
 }
 
