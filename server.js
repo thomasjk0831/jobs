@@ -7,6 +7,7 @@ import morgan from 'morgan'
 //routers
 import jobRouter from './routes/jobRouter.js'
 import mongoose from 'mongoose'
+import errorHandler from './middleware/errorHandler.js'
 
 //setup middleware to use logging about requests
 if(process.env.NODE.ENV === 'development')
@@ -32,10 +33,7 @@ app.use('*', (req,res)=>{
 })
 
 //ERROR HANDLE HAS TO BE LAST ROUTE
-app.use((err, req, res, next)=>{
-  console.log(err)
-  res.status(500).json({msg:'something went wrong'})
-})
+app.use(errorHandler)
 
 const port = process.env.PORT || 5100
 
