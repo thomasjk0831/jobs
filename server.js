@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import jobRouter from './routes/jobRouter.js'
 import mongoose from 'mongoose'
 import errorHandler from './middleware/errorHandler.js'
+import { validateTest } from './middleware/validation.js'
 
 //setup middleware to use logging about requests
 if(process.env.NODE.ENV === 'development')
@@ -20,9 +21,9 @@ app.get("/", (req, res)=>{
   res.send("hello world")
 })
 
-app.post('/', (req, res)=>{
-  console.log(req)
-  res.json({ message: 'data received'})
+app.post('/api/v1/test', validateTest, (req, res)=>{
+  const {name} = req.body
+  res.json({message: `hello ${name}`})
 })
 
 app.use('/api/v1/jobs', jobRouter)
