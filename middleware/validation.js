@@ -19,7 +19,7 @@ export const validateTest = withValidationErrors([
     body('name')
     .notEmpty()
     .withMessage('name is required')
-    .isLength({ min: 3, max:40})
+    .isLength({ min: 1, max:40})
     .withMessage('name must be between 3 and 40 chars')
     .trim()
 ])

@@ -1,5 +1,5 @@
 import Job from '../models/JobModel.js'
-import {StatusCodes} from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { notFoundError } from '../errors/customeErrors.js'
 
 export const getAllJobs = async (req, res)=>{
@@ -11,7 +11,7 @@ export const getSingleJob = async (req, res) => {
   const { id } = req.params
   const job = await Job.findById(id)
   if(!job){
-    throw new notFoundError(`job with ${id} not found`)
+    throw new notFoundError(`job ${id} not found`)
   }
   res.status(StatusCodes.OK).json({ job })
 }
@@ -23,7 +23,7 @@ export const editJob = async (req, res) => {
       new: true
     })
     if(!updatedJob){
-      throw new notFoundError(`job with ${id} not found`)
+      throw new notFoundError(`job ${id} not found`)
     }
   
     res.status(StatusCodes.OK).json({ msg: 'job modified', job: updatedJob})
