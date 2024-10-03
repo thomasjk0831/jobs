@@ -7,11 +7,4 @@ const errorHandler = (err, req, res, next)=>{
     res.status(statusCode).json({msg})
 }
 
-const defaultHandler = (err, req, res, next)=>{
-    console.log(err)
-    const statusCode = err.statusCode || StatusCodes.SERVICE_UNAVAILABLE
-    const msg = err.message || 'default error'
-    res.status(statusCode).json({msg})
-}
-
 export default errorHandler
